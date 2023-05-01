@@ -9,16 +9,17 @@ class enrutador
 {
 public:
     enrutador();
-    void assing_name(char nombre);
+    void assing_name(string nombre);
     void find_connecciones();
-    void asigConex(char enrutador, int valor);
-    void eliminarConex(char enrutador);
-    void modificarEnrutador(char enrutador, int valor);
+    void asigConex(string enrutador, int valor);
+    void eliminarConex(string enrutador);
+    void modificarEnrutador(string enrutador, int valor);
     void imprimirMapa();
+    bool ConexExist(string nombre);
 private:
-    char name;
-    map<char,int> conexiones;
-    map<char,int>::iterator l;
+    string name;
+    map<string,int> conexiones;
+    map<string,int>::iterator l;
 };
 
 

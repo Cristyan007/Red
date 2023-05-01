@@ -5,6 +5,7 @@
 #include<vector>
 #include<map>
 #include "enrutador.h"
+#include "database.h"
 using namespace std;
 
 class red
@@ -12,16 +13,17 @@ class red
 public:
     red();
     void imprimir();
-    void agregarNodo(char nombre);
-    void eliminarNodo(char nombre);
-    void modificarCosto(char nombre, char nombre2, int valor);
-    bool NodeExist(char nombre);
-
+    void agregarNodo(string nombre);
+    void eliminarNodo(string nombre);
+    void modificarCosto(string nombre, string nombre2, int valor);
+    bool NodeExist(string nombre);
+    vector<string> nodosArchivo(vector<string> v1, vector<string> v2);
+    void archivo(string archivo);
 private:
-    void eliminardato(char dato);
-    void inserdato(char nombre, enrutador valor);
-    map<char,enrutador> nodos;
-    map<char,enrutador>::iterator j;
+    void eliminardato(string dato);
+    void inserdato(string nombre, enrutador valor);
+    map<string,enrutador> nodos;
+    map<string,enrutador>::iterator j;
 };
 
 

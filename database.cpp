@@ -14,12 +14,21 @@ void database::assign_path(string path)
 {
     this->path = path;
 }
-
-string database::get_all_database()
+void database::read_all_database()
 {
-    read_all_database();
-    return info_db;
+    fstream db;
+    db.open(path+name, ios_base::in);
+    if(db.is_open()){
+        //cout<<"se abrio correctamente";
+        while(!db.eof()){
+            info_db.push_back(db.get());
+        }
+        info_db.pop_back();
+        db.close();
+    }
 }
+
+
 
 string database::get_row_database(unsigned int row)
 {
@@ -29,13 +38,13 @@ string database::get_row_database(unsigned int row)
 
 vector<string> database::get_col_database(unsigned int col, char segmentar)
 {
-    read_all_database();
-    vector<string> aux;
+    vector<string> aux, final;
+    read_all_rows();
     for (unsigned long long i = 0; i < v_row.size(); ++i) {
         aux = split_string(segmentar,v_row[i]);
-        v_col.push_back(aux[col]);
+        final.push_back(aux[col]);
     }
-    return aux;
+    return final;
 }
 
 
@@ -69,21 +78,6 @@ void database::inser_row(string data, unsigned int i)
 
 
 //PRIVADAAAAAAAAD
-
-void database::read_all_database()
-{
-    fstream db;
-    db.open(path+name, ios_base::in);
-    if(db.is_open()){
-        //cout<<"se abrio correctamente";
-        while(!db.eof()){
-            info_db.push_back(db.get());
-        }
-        info_db.pop_back();
-        db.close();
-    }
-}
-
 void database::read_all_rows()
 {
     read_all_database();
@@ -104,6 +98,13 @@ vector<string> database::split_string(char a, string info)
     }
     rows.push_back(info.substr(pos,info.size()-pos)) ;
     return rows;
+}
+
+
+string database::get_all_database()
+{
+    read_all_database();
+    return info_db;
 }
 
 string database::vector2string(char a, vector<string> info)
