@@ -1,9 +1,10 @@
 #ifndef RED_H
 #define RED_H
-
 #include <iostream>
 #include<vector>
 #include<map>
+#include <string>
+#include <algorithm>
 #include "enrutador.h"
 #include "database.h"
 using namespace std;

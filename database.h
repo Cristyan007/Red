@@ -19,6 +19,7 @@ public:
     void append_data(string data, string a);
     void delete_row(unsigned int row);
     void inser_row(string data, unsigned i);
+    bool vacioOrfull();
 
 private:
     void save_data(string data);

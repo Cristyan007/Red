@@ -19,13 +19,13 @@ void database::read_all_database()
     fstream db;
     db.open(path+name, ios_base::in);
     if(db.is_open()){
-        //cout<<"se abrio correctamente";
         while(!db.eof()){
             info_db.push_back(db.get());
         }
         info_db.pop_back();
         db.close();
     }
+
 }
 
 
@@ -74,6 +74,18 @@ void database::inser_row(string data, unsigned int i)
         info.insert(info.begin()+i,data);
         save_data(vector2string('\n',info));
     }
+}
+
+bool database::vacioOrfull()
+{
+    fstream db;
+    db.open(path+name, ios_base::in);
+    if(db.is_open()){
+        cout<<'\t'<<"--- NODOS CARGADOS ---"<<'\t'<<endl;
+        return true;
+    }
+    cout<<"Algo paso con el archivo. Puede que sea la ruta o el nombre. "<<endl<<endl;
+    return false;
 }
 
 
