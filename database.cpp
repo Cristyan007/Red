@@ -29,7 +29,6 @@ void database::read_all_database()
 }
 
 
-
 string database::get_row_database(unsigned int row)
 {
     read_all_rows();

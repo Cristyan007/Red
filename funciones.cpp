@@ -8,7 +8,8 @@ void imprimirmenu()
     cout<<"3)"<<' '<<"Asignar costo entre dos nodos."<<'\t'<<endl;
     cout<<"4)"<<' '<<"modificar costo entre dos nodos."<<'\t'<<endl;
     cout<<"5)"<<' '<<"Eliminar un nodo."<<'\t'<<endl;
-    cout<<"6)"<<' '<<"salir."<<'\t'<<endl<<endl;
+    cout<<"6)"<<' '<<"Calcular la mejor ruta"<<'\t'<<endl;
+    cout<<"7)"<<' '<<"salir."<<'\t'<<endl<<endl;
 }
 
 int opcionmenu()
@@ -16,9 +17,9 @@ int opcionmenu()
     int num;
         bool valido = false;
         while (!valido) {
-            cout << "Ingrese un numero (1-6): ";
+            cout << "Ingrese un numero (1-7): ";
             cin >> num;
-            if (num >= 1 && num <= 6) {
+            if (num >= 1 && num <= 7) {
                 valido = true;
             }
         }
@@ -68,9 +69,18 @@ bool acciones(red *nueva)
         return true;
     }
     if (opcion == 6){
+        string inicio;
+        string fin;
+        cout<<"Ingrese el nodo de partida"<<endl;
+        cin>>inicio;
+        cout<<"Ingrese el nodo al que desea llegar"<<endl;
+        cin>>fin;
+        nueva->bellmanFord(inicio,fin);
+        return true;
+    }
+    if (opcion == 7){
         cout<<'\t'<<"--------- HASTA LA PROXIMA ---------"<<'\t'<<endl<<endl<<endl;
         return false;
     }
-
 }
 

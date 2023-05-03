@@ -16,9 +16,9 @@ public:
     void modificarEnrutador(string enrutador, int valor);
     void imprimirMapa();
     bool ConexExist(string nombre);
+    map<string,int> conexiones;
 private:
     string name;
-    map<string,int> conexiones;
     map<string,int>::iterator l;
 };
 

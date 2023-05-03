@@ -4,7 +4,9 @@
 #include<vector>
 #include<map>
 #include <string>
+#include <queue>
 #include <algorithm>
+#include <stack>
 #include "enrutador.h"
 #include "database.h"
 using namespace std;
@@ -20,6 +22,7 @@ public:
     bool NodeExist(string nombre);
     vector<string> nodosArchivo(vector<string> v1, vector<string> v2);
     void archivo(string archivo);
+    void bellmanFord(string origen, string destino);
 private:
     void eliminardato(string dato);
     void inserdato(string nombre, enrutador valor);

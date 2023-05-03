@@ -112,3 +112,75 @@ void red::modificarCosto(string nombre, string nombre2, int valor)
     }
 }
 
+void red::bellmanFord(string origen, string destino) {
+    map<string, int> distancias;
+    map<string, string> anteriores;
+    int num_nodos = nodos.size();
+
+    // Inicializar distancias a infinito y el nodo anterior a vacío
+    for (auto& i : nodos) {
+        if (i.first == origen) {
+            distancias[i.first] = 0;
+        } else {
+            distancias[i.first] = INT_MAX;
+        }
+        anteriores[i.first] = "";
+    }
+
+    // Realizar n-1 iteraciones para encontrar la ruta mínima
+    for (int i = 1; i < num_nodos; i++) {
+        for (auto& nodo : nodos) {
+            string nodo_actual = nodo.first;
+            for (auto& c : nodo.second.conexiones) {
+                if (c.second == -1) {
+                    continue; // ignorar nodos desconectados
+                }
+                int distancia = distancias[nodo_actual] + c.second;
+                if (distancia < distancias[c.first]) {
+                    distancias[c.first] = distancia;
+                    anteriores[c.first] = nodo_actual;
+                }
+            }
+        }
+    }
+
+    // Verificar si hay ciclos de pesos negativos
+    for (auto& nodo : nodos) {
+        string nodo_actual = nodo.first;
+        for (auto& c : nodo.second.conexiones) {
+            if (c.second == -1) {
+                continue; // ignorar nodos desconectados
+            }
+            int distancia = distancias[nodo_actual] + c.second;
+            if (distancia < distancias[c.first]) {
+                cout << "El grafo contiene un ciclo de pesos negativos." << endl;
+                return;
+            }
+        }
+    }
+
+    // Recuperar la ruta más corta desde el origen hasta el destino
+    stack<string> ruta;
+    string nodo = destino;
+
+    while (nodo != origen) {
+        ruta.push(nodo);
+        nodo = anteriores[nodo];
+    }
+
+    ruta.push(origen);
+
+    cout << "Ruta mas corta desde " << origen << " hasta " << destino << " es:" << endl;
+    while (!ruta.empty()) {
+        cout << ruta.top();
+        ruta.pop();
+        if (!ruta.empty()) {
+            cout << " -> ";
+        }
+    }
+
+    cout << endl << "La distancia total es: " << distancias[destino] << endl;
+}
+
+
+

@@ -30,35 +30,4 @@ private:
      string name, path, info_db;
      vector<string> v_row,v_col;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif // DATABASE_H
