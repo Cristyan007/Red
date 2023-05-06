@@ -45,4 +45,16 @@ void enrutador::imprimirMapa()
     }
 }
 
+void enrutador::find_conexiones(map<string, enrutador> &nodos)
+{
+    for(auto& [nombre, nodo] : nodos) {
+        if(nombre != name) { // Evitar agregar la conexión consigo mismo
+            if(nodo.ConexExist(name)) {
+                conexiones[nombre] = nodo.conexiones[name];
+            }
+        }
+    }
+}
+
+
 

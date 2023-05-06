@@ -9,7 +9,8 @@ void imprimirmenu()
     cout<<"4)"<<' '<<"modificar costo entre dos nodos."<<'\t'<<endl;
     cout<<"5)"<<' '<<"Eliminar un nodo."<<'\t'<<endl;
     cout<<"6)"<<' '<<"Calcular la mejor ruta"<<'\t'<<endl;
-    cout<<"7)"<<' '<<"salir."<<'\t'<<endl<<endl;
+    cout<<"7)"<<' '<<"Generar red aleatoria"<<'\t'<<endl;
+    cout<<"8)"<<' '<<"salir."<<'\t'<<endl<<endl;
 }
 
 int opcionmenu()
@@ -17,9 +18,9 @@ int opcionmenu()
     int num;
         bool valido = false;
         while (!valido) {
-            cout << "Ingrese un numero (1-7): ";
+            cout << "Ingrese un numero (1-8): ";
             cin >> num;
-            if (num >= 1 && num <= 7) {
+            if (num >= 1 && num <= 8) {
                 valido = true;
             }
         }
@@ -79,6 +80,17 @@ bool acciones(red *nueva)
         return true;
     }
     if (opcion == 7){
+        int numNodos;
+        double pConect;
+        cout<<"Ingrese la cantidad de nodos de la red aleatoria"<<endl;
+        cin>>numNodos;
+        cout<<"Ingrese una probabilidad (0-1) de que los nodos se encuentren conectados"<<endl;
+        cin>>pConect;
+        nueva->generarRedAleatoria(numNodos,pConect);
+        nueva->imprimir();
+        return true;
+    }
+    if (opcion == 8){
         cout<<'\t'<<"--------- HASTA LA PROXIMA ---------"<<'\t'<<endl<<endl<<endl;
         return false;
     }

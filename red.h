@@ -4,9 +4,9 @@
 #include<vector>
 #include<map>
 #include <string>
-#include <queue>
 #include <algorithm>
 #include <stack>
+#include <ctime>
 #include "enrutador.h"
 #include "database.h"
 using namespace std;
@@ -23,20 +23,12 @@ public:
     vector<string> nodosArchivo(vector<string> v1, vector<string> v2);
     void archivo(string archivo);
     void bellmanFord(string origen, string destino);
+    void generarRedAleatoria(int numNodos, float probabilidad);
 private:
     void eliminardato(string dato);
     void inserdato(string nombre, enrutador valor);
     map<string,enrutador> nodos;
     map<string,enrutador>::iterator j;
 };
-
-
-
-
-
-
-
-
-
 
 #endif // RED_H

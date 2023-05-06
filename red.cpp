@@ -108,7 +108,6 @@ void red::modificarCosto(string nombre, string nombre2, int valor)
     if (NodeExist(nombre) && NodeExist(nombre2)) {
         nodos[nombre].modificarEnrutador(nombre2, valor);
         nodos[nombre2].modificarEnrutador(nombre, valor);
-        cout<<'\t'<<"--- COSTO ENTRE "<<nombre<<" Y "<<nombre2<<" MODIFICADO ---"<<'\t'<<endl;
     }
 }
 
@@ -180,6 +179,58 @@ void red::bellmanFord(string origen, string destino) {
     }
 
     cout << endl << "La distancia total es: " << distancias[destino] << endl;
+}
+
+
+void red::generarRedAleatoria(int numNodos, float probabilidad) {
+    srand(time(nullptr));
+    // Crear vector de nombres de enrutadores
+    vector<string> nombres;
+    for (int i = 0; i < numNodos; i++) {
+        string nombre = "";
+        if (i < 26*26) { // Si hay suficientes combinaciones de dos letras
+            int a = i / 26;
+            int b = i % 26;
+            nombre += (char)(a + 'A');
+            nombre += (char)(b + 'A');
+        }
+        nombres.push_back(nombre);
+    }
+
+    // Crear matriz de probabilidades y costos
+    vector<vector<float>> probs(numNodos, vector<float>(numNodos));
+    vector<vector<int>> costos(numNodos, vector<int>(numNodos));
+    for (int i = 0; i < numNodos; i++) {
+        for (int j = i+1; j < numNodos; j++) {
+            float p = (float)rand() / RAND_MAX;
+            if (p <= probabilidad) {
+                int costo = rand() % 10 + 1;
+                probs[i][j] = p;
+                probs[j][i] = p;
+                costos[i][j] = costo;
+                costos[j][i] = costo;
+            }
+        }
+    }
+
+    // Crear enrutadores y establecer conexiones
+    for (int i = 0; i < numNodos; i++) {
+        string nombre = nombres[i];
+        enrutador e;
+        e.assing_name(nombre);
+
+        for (int j = 0; j < numNodos; j++) {
+            if (i != j && probs[i][j] > 0) {
+                string nombre2 = nombres[j];
+                e.asigConex(nombre2, costos[i][j]);
+            } else if (i != j) {
+                string nombre2 = nombres[j];
+                e.asigConex(nombre2, -1);
+            }
+        }
+
+        nodos[nombre] = e;
+    }
 }
 
 
